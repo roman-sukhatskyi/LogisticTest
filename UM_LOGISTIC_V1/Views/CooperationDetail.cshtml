@@ -1,0 +1,82 @@
+﻿<div align="center" ng-show="isLoading">
+    <img src="~/Resources/Picture/loading.gif" align="center" />
+</div>
+<div class="row" ng-show="!isLoading">
+    <div class="row" align="center">
+        <div style="margin-top: 100px;">
+            <h4>Заявка на співробітництво:</h4>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col-md-6">
+        <img class="media-object" style="width:60%;height:60%;" align="right" ng-src="{{logo.url ||'/Resources/Picture/empty_cooperation.jpg'}}" alt="...">
+    </div>
+    <div class="col-md-6">
+        <div>
+            <h5>Номер заявки: {{cooperationToView.Id}}</h5>
+        </div>
+        <div>
+            <h5>Водій(ПІБ): {{cooperationToView.FullName}}</h5>
+        </div>
+        <div>
+            <h5>Місце проживання: {{cooperationToView.ResidenceAddress}}</h5>
+        </div>
+        <div>
+            <h5>Місце стоянки автомобіля: {{cooperationToView.ParkingPlace}}</h5>
+        </div>
+        <div>
+            <h5>Фізична особа: {{cooperationToView.IsPhysicalPerson}}</h5>
+        </div>
+        <div>
+            <h5>Підприємець:  {{cooperationToView.IsBussinessPerson}}</h5>
+        </div>
+        <div>
+            <h5>Марка автомобіля: {{cooperationToView.CarModel}}</h5>
+        </div>
+        <div>
+            <h5>Довжина: {{cooperationToView.TransportLength}}</h5>
+        </div>
+        <div>
+            <h5>Ширина: {{cooperationToView.TransportWidth}}</h5>
+        </div>
+        <div>
+            <h5>Висота: {{cooperationToView.TransportHeight}}</h5>
+        </div>
+        <div>
+            <h5>Вантажність(т): {{cooperationToView.TransportWeight}}</h5>
+        </div>
+        <div>
+            <h5>Об'єм(м3): {{cooperationToView.TransportCapacity}}</h5>
+        </div>
+        <div>
+            <h5>Вміст стріли(м): {{cooperationToView.TransportArrow}}</h5>
+        </div>
+        <div>
+            <h5>Вартість розвантажувальних робіт: {{cooperationToView.WorkCost}}</h5>
+        </div>
+        <div>
+            <h5>Тип: {{cooperationToView.WorkType}}</h5>
+        </div>
+        <div>
+            <h5>Вартість доставки(грн/км): {{cooperationToView.DeliveryCost}}</h5>
+        </div>
+        <div class="inline">
+            <button type="button" class="btn btn-success btn-xs" ng-click="acceptApplication(cooperationToView.Id)"><i class="fa fa-check" style="margin-right: 8px;" aria-hidden="true"></i>Оформити</button>
+            <button ng-show="!isExistElementInTrash(cooperationToView.Id, false)" type="button" class="btn btn-warning btn-xs" ng-click="moveIntoTrash(cooperationToView.Id, cooperationToView.FullName)"><i class="fa fa-shopping-cart" style="margin-right: 8px;" aria-hidden="true"></i>В корзину</button>
+            <button ng-show="isExistElementInTrash(cooperationToView.Id, false)" type="button" class="btn btn-warning btn-xs" ng-click="removeFromTrash(cooperationToView.Id)"><i class="fa fa-trash" style="margin-right: 8px;" aria-hidden="true"></i>Видалити з корзини</button>
+    </div>
+    </div>
+</div>
+<div class="row" ng-show="!isLoading" align="center">
+    <div class="row" style="margin-top: 50px;">
+        <h4>Галерея:</h4>
+        <div class="row" ng-show="htmlPicuresContent == ''">
+            <div>
+                <h4>Немає даних</h4>
+            </div>
+        </div>
+
+        <div id="gallery-cooperation">
+        </div>
+    </div>
+</div>

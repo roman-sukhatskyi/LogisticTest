@@ -1,0 +1,45 @@
+﻿<div align="center" ng-show="isLoading">
+    <img src="~/Resources/Picture/loading.gif" align="center" />
+</div>
+<div class="row" ng-show="!isLoading">
+    <h4></h4>
+</div>
+<div class="row" style="margin-top: 100px;" ng-show="!isLoading">
+    <div class="row">   
+       <div class="col-md-offset-6">
+           Тип заявки:
+        <div class="dropdown"> 
+            <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-toggle="dropdown">
+                {{currentTypeCaption}}
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li ng-repeat="option in applicationTypes.availableOptions"><a href="#" ng-click="changeApplicationType(option.id, option.name)">{{option.name}}</a></li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    <div class="row" ng-show="applications.length == 0">
+        <div class="col-md-offset-6 btn-sm">
+            <h4>Немає даних</h4>
+        </div>
+    </div>
+    <div class="row" ng-repeat="app in applications">
+        <div class="col-md-10 col-md-offset-4" style="margin-top:20px;">
+            <div class="media">
+                <div class="media-left">
+                    <a ng-href="{{app.url}}">
+                        <img class="media-object" style="width:200px;height:120px;" ng-src="{{pictures[app.id] || (currentApplicationType == true ? '/Resources/Picture/empty_transportation.png' : '/Resources/Picture/empty_cooperation.jpg')}}" alt="...">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">{{app.title}}</h4>
+                    <button type="button" class="btn btn-success col-md-offset-6 btn-sm" ng-click="acceptApplication(app.id, currentApplicationType)"><i class="fa fa-check" style="margin-right: 8px;" aria-hidden="true"></i>Прийняти</button>
+                    <button style="margin-top:10px;" type="button" class="btn btn-warning col-md-offset-6 btn-sm" ng-click="declineApplication(app.id, currentApplicationType)"><i class="fa fa-trash" style="margin-right: 8px;" aria-hidden="true"></i>Відхилити</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <i ng-show="isPartLoading" class="fa fa-refresh fa-spin fa-2x fa-fw col-md-offset-6"></i>
+    <button style="margin-top:20px;" type="button" class="btn btn-primary col-md-offset-6 btn-sm" ng-click="loadMore()">Загрузити ще</button>
+</div>

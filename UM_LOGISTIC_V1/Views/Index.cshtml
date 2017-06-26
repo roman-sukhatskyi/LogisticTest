@@ -1,0 +1,102 @@
+﻿
+<!DOCTYPE html>
+<html lang="en" ng-app="mainModule">
+<head>
+    <meta charset="utf-8">
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   
+    @System.Web.Optimization.Styles.Render("~/bundles/Styles")
+    @System.Web.Optimization.Scripts.Render("~/bundles/Client/Libraries")
+    @System.Web.Optimization.Scripts.Render("~/bundles/Client/Modules")
+    @System.Web.Optimization.Scripts.Render("~/bundles/Client/Services")
+    @System.Web.Optimization.Scripts.Render("~/bundles/Client/Controllers")
+
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/home" class="navbar-brand">ЮМ ЛОГІСТИКА</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main" ng-controller="ProfileController">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/cooperations">Знайти машину</a>
+                    </li>
+                    <li>
+                        <a href="/transportations">Знайти вантаж</a>
+                    </li>
+                    <li>
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Залишити заявку <span class="caret"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="download">
+                            <li><a href="/trans_application">Перевезення</a></li>
+                            <li><a href="/coop_application">Співробітництво</a></li>
+                        </ul>
+                    </li>
+                    <li style="display:none;" id="feed-callback-button" ng-show="!isStaff">
+                        <a href="/call_feedback"><i class="fa fa-phone" aria-hidden="true"></i> Зворотній зв'язок</a>
+                    </li>
+                </ul>
+                <div>
+                <ul style="display:none;" id="profile-menu-button" class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">
+                            <div ng-show="!isAuthorized">Авторизуйтесь</div>
+                            <div ng-show="isAuthorized">
+                                <img ng-src="{{userImage || '/Resources/Picture/empty_customer.png'}}" alt="userImage" class="img-circle" height="20" width="20">
+                                {{profileName}}
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="download">
+                            <li ng-show="!isAuthorized"><a href="/login">Вхід</a></li>
+                            <li ng-show="isAuthorized"><a href="/my_applications">Мої заявки</a></li>
+                            <li ng-show="isAuthorized"><a href="#" ng-click="logoutUser()">Вихід</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul style="display:none;" id="profile-work-button" class="nav navbar-nav navbar-right" ng-show="isStaff">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download"><i class="fa fa-list" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" aria-labelledby="download">
+                            <li><a href="/not_filtered_applications"><i class="fa fa-filter" style="margin-right: 8px;" aria-hidden="true"></i>Заявки на фільтрацію({{notFilteredApplicationsCount}})</a></li>
+                            <li><a href="/accounts"><i class="fa fa-users" style="margin-right: 8px;" aria-hidden="true"></i>Користувачі</a></li>
+                            <li><a href="/tasks"><i class="fa fa-tasks" style="margin-right: 8px;" aria-hidden="true"></i>Задачі({{clientTasksCount}})</a></li>
+                            <li><a href="/maps"><i class="fa fa-map-marker" style="margin-right: 8px;" aria-hidden="true"></i>Карта</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                    <ul style="display:none;" class="nav navbar-nav navbar-right" id="profile-shop-button" ng-show="isStaff">
+                        <li class="dropdown" ng-click="getApplicationsInTrashElements()">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">{{applicationsInTrash}}</span></a>
+                            <ul class="dropdown-menu" aria-labelledby="download">
+                                <li ng-repeat="app in appTrashElements"><a href="{{app.Type != false ? '/transportation/' + app.Id : '/cooperation/' + app.Id}}">{{app.Title}}</a></li>
+                                <li ng-show="appTrashElements.length == 0"><a href="#">Немає даних</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div ui-view></div>
+    </div>
+    <footer id="footer">
+        <div class="container" style="text-align: center;">
+                &copy;2016 ЮМ Логістика.
+        </div>
+    </footer>
+    <script src="~/Style/bootswatch/bootstrap.min.js"></script>
+    <script src="~/Style/bootswatch/custom.js"></script>
+</body>
+</html>

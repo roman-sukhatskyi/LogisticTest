@@ -1,0 +1,68 @@
+﻿<div align="center" ng-show="isLoading">
+    <img src="~/Resources/Picture/loading.gif" align="center" />
+</div>
+<div class="row" ng-show="!isLoading">
+    <div class="row" align="center">
+        <div style="margin-top: 100px;">
+            <h4>Заявка на перевезення:</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <img class="media-object" style="width:60%;height:60%;" align="right" ng-src="{{logo.url || '/Resources/Picture/empty_transportation.png'}}" alt="...">
+        </div>
+        <div class="col-md-6">
+            <div>
+                <h5>Номер заявки: {{transportationToView.Id}}</h5>
+            </div>
+            <div>
+                <h5>ПІБ: {{transportationToView.Name}}</h5>
+            </div>
+            <div>
+                <h5>Адреса відправки: {{transportationToView.SendAddress}}</h5>
+            </div>
+            <div>
+                <h5>Адреса отримання: {{transportationToView.DeliveryAddress}}</h5>
+            </div>
+            <div>
+                <h5>Дата отримання вантажу: {{transportationToView.CompleteDate}}</h5>
+            </div>
+            <div>
+                <h5>Тип вантажу: {{transportationToView.ShipmentType}}</h5>
+            </div>
+            <div>
+                <h5>Довжина вантажу: {{transportationToView.ShipmentLength}}</h5>
+            </div>
+            <div>
+                <h5>Ширина вантажу: {{transportationToView.ShipmentWidth}}</h5>
+            </div>
+            <div>
+                <h5>Висота вантажу: {{transportationToView.ShipmentHeight}}</h5>
+            </div>
+            <div>
+                <h5>Вантажність(т): {{transportationToView.ShipmentWeight}}</h5>
+            </div>
+            <div>
+                <h5>Об'єм(м3): {{transportationToView.ShipmentCapacity}}</h5>
+            </div>
+            <div class="inline">
+                <button type="button" class="btn btn-success btn-xs" ng-click="acceptApplication(transportationToView.Id)"><i class="fa fa-check" style="margin-right: 8px;" aria-hidden="true"></i>Оформити</button>
+                <button ng-show="!isExistElementInTrash(transportationToView.Id, true)" type="button" class="btn btn-warning btn-xs" ng-click="moveIntoTrash(transportationToView.Id, transportationToView.Name)"><i class="fa fa-shopping-cart" style="margin-right: 8px;" aria-hidden="true"></i>В корзину</button>
+                <button ng-show="isExistElementInTrash(transportationToView.Id, true)" type="button" class="btn btn-warning btn-xs" ng-click="removeFromTrash(transportationToView.Id)"><i class="fa fa-trash" style="margin-right: 8px;" aria-hidden="true"></i>Видалити з корзини</button>
+            </div>
+        </div>
+        </div>
+    </div>
+<div class="row" ng-show="!isLoading" align="center">
+    <div class="row" style="margin-top: 50px;">
+        <h4>Галерея:</h4>
+        <div class="row" ng-show="htmlPicuresContent == ''">
+            <div>
+                <h4>Немає даних</h4>
+            </div>
+        </div>
+        
+        <div id="gallery-transportation">
+        </div>
+    </div>
+</div>

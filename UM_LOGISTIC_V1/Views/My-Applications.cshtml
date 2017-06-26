@@ -1,0 +1,139 @@
+﻿<div align="center" ng-show="isLoading">
+    <img src="~/Resources/Picture/loading.gif" align="center" />
+</div>
+<div class="row" ng-show="!isLoading">
+    <h4></h4>
+</div>
+<div class="row" style="margin-top: 100px;" ng-show="!isLoading">
+    <div class="row">
+        <div class="dropdown col-md-2">
+            <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-toggle="dropdown">
+                {{currentTypeCaption}}
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li ng-repeat="option in applicationTypes.availableOptions"><a href="#" ng-click="changeApplicationType(option.id, option.name)">{{option.name}}</a></li>
+            </ul>
+        </div>
+        <div>
+        <div class="checkbox checkbox-primary pull-right">
+            <input id="checkbox2" type="checkbox" checked="" ng-model="isOrderedByMe" ng-click="onChangeMyOrderedFilter()">
+            <label for="checkbox2">
+                Оформлені заявки 
+            </label>
+        </div>
+            </div>
+    </div>
+    <div ng-show="currentApplicationType == true">
+        <div class="row" ng-show="t_applications.length == 0">
+            <div class="col-md-offset-6 btn-sm">
+                <h4>Немає даних</h4>
+            </div>
+        </div>
+        <table class="table table-striped table-hover" ng-show="t_applications.length > 0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ПІБ</th>
+                    <th>Контактний телефон</th>
+                    <th>Адреса відправки</th>
+                    <th>Адреса отримання</th>
+                    <th>Дата отримання вантажу</th>
+                    <th>Тип вантажу</th>
+                    <th>Довжина вантажу</th>
+                    <th>Ширина вантажу</th>
+                    <th>Висота вантажу</th>
+                    <th>Вантажність(т)</th>
+                    <th>Об'єм(м3)</th>
+                    <th>Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="transportation in t_applications">
+                    <td>{{transportation.id}}</td>
+                    <td>{{transportation.name}}</td>
+                    <td>{{transportation.contactPhone}}</td>
+                    <td>{{transportation.sendAddress}}</td>
+                    <td>{{transportation.deliveryAddress}}</td>
+                    <td>{{transportation.completeDate}}</td>
+                    <td>{{transportation.shipmentType}}</td>
+                    <td>{{transportation.shipmentLength}}</td>
+                    <td>{{transportation.shipmentWidth}}</td>
+                    <td>{{transportation.shipmentHeight}}</td>
+                    <td>{{transportation.shipmentCapacity}}</td>
+                    <td>{{transportation.shipmentWeight}}</td>
+                    <td>
+                        <div class="btn-group" ng-show="isOrderedByMe == false">
+                            <a class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" ng-click="refreshApplicationDate(true, transportation.id)"><i class="fa fa-refresh fa-sm"></i> Обновити дату</a></li>
+                                <li><a ng-href="/transportation/edit/{{transportation.id}}"<i class="fa fa-edit fa-sm"></i> Редагувати</a></li>
+                                <li><a href="#" ng-click="removeApplication(true, transportation.id)"><i class="fa fa-trash fa-sm"></i> Видалити</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-show="currentApplicationType == false">
+        <div class="row" ng-show="c_applications.length == 0">
+            <div class="col-md-offset-6 btn-sm">
+                <h4>Немає даних</h4>
+            </div>
+        </div>
+        <table class="table table-striped table-hover" ng-show="c_applications.length > 0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Водій(ПІБ)</th>
+                    <th>Місце проживання</th>
+                    <th>Місце стоянки автомобіля</th>
+                    <th>Контактний телефон</th>
+                    <th>Фізична особа</th>
+                    <th>Підприємець</th>
+                    <th>Марка автомобіля</th>
+                    <th>Ширина</th>
+                    <th>Висота</th>
+                    <th>Вантажність(т)</th>
+                    <th>Об'єм(м3)</th>
+                    <th>Вміст стріли(м)</th>
+                    <th>Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="cooperation in c_applications">
+                    <td>{{cooperation.id}}</td>
+                    <td>{{cooperation.fullName}}</td>
+                    <td>{{cooperation.residenceAddress}}</td>
+                    <td>{{cooperation.parkingPlace}}</td>
+                    <td>{{cooperation.contactPhone}}</td>
+                    <td>{{cooperation.isPhysicalPerson}}</td>
+                    <td>{{cooperation.isBussinessPerson}}</td>
+                    <td>{{cooperation.carModel}}</td>
+                    <td>{{cooperation.transportWidth}}</td>
+                    <td>{{cooperation.transportHeight}}</td>
+                    <td>{{cooperation.transportWeight}}</td>
+                    <td>{{cooperation.transportCapacity}}</td>
+                    <td>{{cooperation.transportArrow}}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" ng-click="refreshApplicationDate(false, cooperation.id)" ng-show="isOrderedByMe == false"><i class="fa fa-refresh fa-sm"></i> Обновити дату</a></li>
+                                <li><a ng-href="/cooperation/edit/{{cooperation.id}}"><i class="fa fa-edit fa-sm"></i> Редагувати</a></li>
+                                <li><a href="#" ng-click="removeApplication(false, cooperation.id)" ng-show="isOrderedByMe == false"><i class="fa fa-trash fa-sm"></i> Видалити</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <i ng-show="isPartLoading" class="fa fa-refresh fa-spin fa-2x fa-fw col-md-offset-6"></i>
+    <button style="margin-top:20px;" type="button" class="btn btn-primary col-md-offset-6 btn-sm" ng-click="loadMore()">Загрузити ще</button>
+</div>

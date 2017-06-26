@@ -1,0 +1,74 @@
+﻿<div align="center" ng-show="isLoading">
+    <img src="~/Resources/Picture/loading.gif" align="center"/>
+</div>
+<div class="row" ng-show="!isLoading">
+    <h4></h4>
+</div>
+<div class="row" style="margin-top: 100px;" ng-show="!isLoading">
+    <form class="bs-component" name="createForm">
+        <div class="row">
+            <div class="form-group required col-md-6 col-md-offset-3">
+                <label class="control-label">Логін:</label>
+                <input class="form-control input-sm" ng-model="userToAdd.Login" name="login" ng-pattern="/^[A-Za-z\d_-]+$/" type="text" ng-minlength="5" ng-maxlength="20" required>
+                <div ng-messages="createForm.login.$error" style="color:maroon" role="alert">
+                    <div ng-message="minlength">Ваш логін повиннен містити мінімум 5 символів</div>
+                    <div ng-message="maxlength">Ваш логін повиннен містити максимум 20 символів</div>
+                    <div ng-message="pattern">Логін повиннен містити тільки англійські літери(без спеціальних символів)</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group required col-md-6  col-md-offset-3">
+                <label class="control-label">Пароль:</label>
+                <input class="form-control input-sm" name="password" ng-model="userToAdd.Password" type="password" ng-minlength="5" ng-maxlength="20" required>
+                <div ng-messages="createForm.password.$error" style="color:maroon" role="alert">
+                    <div ng-message="minlength">Ваш пароль повиннен містити мінімум 5 символів</div>
+                    <div ng-message="maxlength">Ваш пароль повиннен містити максимум 20 символів</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group required col-md-6  col-md-offset-3">
+                <label class="control-label">Підтвердження пароля:</label>
+                <input class="form-control input-sm" name="confirmationPassword" ng-pattern="{{userToAdd.Password}}" ng-model="userToAdd.ConfirmationPassword" type="password" required>
+                <div ng-messages="createForm.confirmationPassword.$error" style="color:maroon" role="alert">
+                    <div ng-message="pattern">Паролі не співпадають</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group required col-md-6  col-md-offset-3">
+                <label class="control-label">ПІБ:</label>
+                <input class="form-control input-sm" name="fullName" ng-model="userToAdd.FullName" type="text" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6  col-md-offset-3">
+                <label class="control-label">Ваш телефон:</label>
+                <input class="form-control input-sm" ng-model="userToAdd.WorkPhone" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6  col-md-offset-3">
+                <label class="control-label">Місто проживання:</label>
+                <input class="form-control input-sm" ng-model="userToAdd.City" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group required col-md-6 col-md-offset-3">
+                <label class="control-label">Роль:</label>
+                <select class="form-control input-sm" name="role" ng-model="roles.model.id" required ng-minlength="1">
+                    <option ng-repeat="option in roles.options" value="{{option.id}}">{{option.name}}</option>
+                </select>
+                <div ng-messages="createForm.role.$error" style="color:maroon" role="alert">
+                    <div ng-message="minlength">Заповніть поле для ролі</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">
+                    <button type="submit" class="btn btn-primary btn-sm" ng-click="createUser()">Зберегти</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,39 @@
+﻿<div align="center" ng-show="isLoading">
+    <img src="~/Resources/Picture/loading.gif" align="center"/>
+</div>
+<div class="row" ng-show="!isLoading">
+    <h4></h4>
+</div>
+<div class="row" style="margin-top: 100px;" ng-show="!isLoading">
+    <form class="bs-component" name="loginForm">
+        <div class="row">
+        <div class="form-group col-md-6 col-md-offset-3">
+            <label class="control-label">Логін:</label>
+            <input class="form-control input-sm" name="loginUserName" ng-model="loginUserName" type="text" ng-minlength="5" ng-maxlength="20" required>
+            <div ng-messages="loginForm.loginUserName.$error" style="color:maroon" role="alert">
+
+                <div ng-message="minlength">Ваш логін повинне містити мінімум 5 символів</div>
+                <div ng-message="maxlength">Ваш логін повиннен містити максимум 20 символів</div>
+            </div>
+        </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6  col-md-offset-3">
+                <label class="control-label">Пароль:</label>
+                <input class="form-control input-sm" name="loginUserPassword" ng-model="loginUserPassword" type="password" ng-minlength="5" ng-maxlength="20" required>
+                <div ng-messages="loginForm.loginUserPassword.$error" style="color:maroon" role="alert">
+                    <div ng-message="minlength">Ваш пароль повинне містити мінімум 5 символів</div>
+                    <div ng-message="maxlength">Ваш пароль повиннен містити максимум 20 символів</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">
+                    <button type="submit" class="btn btn-primary btn-sm" ng-click="loginUser()">Увійти</button>
+            </div>
+            <div class="col-md-3 text-right">
+                    <a href="/register">Реєстрація</a>
+            </div>
+        </div>
+    </form>
+</div>

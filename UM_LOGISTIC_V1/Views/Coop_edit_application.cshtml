@@ -1,0 +1,114 @@
+﻿<div align="center" ng-show="isLoading">
+    <img src="~/Resources/Picture/loading.gif" align="center" />
+</div>
+<div class="row" align="center" ng-show="!isLoading" style="margin-top: 100px;">
+    <h4>Заявка на співробітництво</h4>
+</div>
+<div class="row" style="margin-top: 25px;" ng-show="!isLoading">
+    <form class="bs-component" name="coopForm">
+        <div class="row">
+            <div class="form-group required col-md-6 col-md-offset-3">
+                <label class="control-label">Водій(ПІБ):</label>
+                <input class="form-control input-sm" name="fullName" ng-model="cooperationToEdit.FullName" type="text" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3  col-md-offset-3">
+                <label class="control-label">Місце проживання:</label>
+                <input class="form-control input-sm" ng-model="cooperationToEdit.ResidenceAddress" type="text">
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">Місце стоянки автомобіля:</label>
+                <input class="form-control input-sm" ng-model="cooperationToEdit.ParkingPlace" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3  col-md-offset-3">
+                <label class="control-label">Фізична особа:</label>
+                <input class="form-group-sm" ng-model="cooperationToEdit.IsPhysicalPerson" type="checkbox">
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">Підприємець:</label>
+                <input class="form-group-sm" ng-model="cooperationToEdit.IsBussinessPerson" type="checkbox">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3  col-md-offset-3">
+                <label class="control-label">Марка автомобіля:</label>
+                <input class="form-control input-sm" ng-model="cooperationToEdit.CarModel" type="text">
+            </div>
+            <div class="form-group required col-md-3">
+                <label class="control-label">Контактний телефон:</label>
+                <input class="form-control input-sm" name="contactPhone" id="contactPhone" ng-model="cooperationToEdit.ContactPhone" type="text" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-2  col-md-offset-3">
+                <label class="control-label">Довжина:</label>
+                <input class="form-control input-sm" ng-model="cooperationToEdit.TransportLength" type="number">
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label">Ширина:</label>
+                <input class="form-control input-sm" ng-model="cooperationToEdit.TransportWidth" type="number">
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label">Висота:</label>
+                <input class="form-control input-sm" ng-model="cooperationToEdit.TransportHeight" type="number">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3  col-md-offset-3">
+                <label class="control-label">Вантажність(т):</label>
+                <input class="form-control input-sm" ng-model="cooperationToEdit.TransportWeight" type="number">
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">Об'єм(м3):</label>
+                <input class="form-control input-sm" ng-model="cooperationToEdit.TransportCapacity" type="number">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3  col-md-offset-3">
+                <label class="control-label">Вміст стріли(м):</label>
+                <input class="form-control input-sm" ng-model="cooperationToEdit.TransportArrow" type="number">
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">Вартість доставки(грн/км):</label>
+                <input class="form-control input-sm" ng-model="cooperationToEdit.DeliveryCost" type="number">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3  col-md-offset-3">
+                <label class="control-label">Вартість розвантажувальних робіт:</label>
+                <input class="form-control input-sm" ng-model="cooperationToEdit.WorkCost" type="number">
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">Тип:</label>
+                <select class="form-control input-sm" ng-model="workTypes.model" ng-options="o.name for o in workTypes.options"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 col-md-offset-3">
+                <button type="submit" class="btn btn-success btn-sm" ng-click="updateCooperation()">Зберегти</button>
+            </div>
+        </div>
+        <div class="row" ng-show="!isLoading" align="center">
+            <div class="row">
+                <div class="form-group col-md-6  col-md-offset-3">
+                    <label class="control-label">Загрузити картинку:</label>
+                    <input type="file" id="coop-picture" name="coop-picture" onchange="angular.element(this).scope().fileChanged()" />
+                </div>
+            </div>
+            <div class="row" style="margin-top: 50px;">
+                <h4>Галерея:</h4>
+                <div class="row" ng-show="htmlPicuresContent == ''">
+                    <div>
+                        <h4>Немає даних</h4>
+                    </div>
+                </div>
+
+                <div id="gallery-cooperation">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

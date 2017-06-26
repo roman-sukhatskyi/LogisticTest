@@ -1,0 +1,108 @@
+﻿<div align="center" ng-show="isLoading">
+    <img src="~/Resources/Picture/loading.gif" align="center" />
+</div>
+<div class="row" ng-show="!isLoading">
+    <h4></h4>
+</div>
+<div class="row" style="margin-top: 100px;" ng-show="!isLoading">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-inline">
+                <label>Довжина вантажу(м):</label>
+            </div>
+            <div class="form-inline">
+                <div class="row">
+                    <div class="col-md-7">
+                        <input style="width:150px;" class="form-control input-sm span2" id="filter-shipment-length" type="text" />
+                    </div>
+                    <div class="col-md-5">
+                        <span><button ng-click="dropFilter(filter,'ShipmentLength')" type="submit" class="btn btn-warning btn-xs"><i class="fa fa-close" aria-hidden="true"></i></button></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline">
+                <label>Ширина вантажу(м):</label>
+            </div>
+            <div class="form-inline">
+                <div class="row">
+                    <div class="col-md-7">
+                        <input style="width:150px;" class="form-control input-sm span2" id="filter-shipment-width" type="text" />
+                    </div>
+                    <div class="col-md-5">
+                        <span><button ng-click="dropFilter(filter, 'ShipmentWidth')" type="submit" class="btn btn-warning btn-xs"><i class="fa fa-close" aria-hidden="true"></i></button></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline">
+                <label>Висота вантажу(м):</label>
+            </div>
+            <div class="form-inline">
+                <div class="row">
+                    <div class="col-md-7">
+                        <input style="width:150px;" class="form-control input-sm span2" id="filter-shipment-height" type="text" />
+                    </div>
+                    <div class="col-md-5">
+                        <span><button ng-click="dropFilter(filter, 'ShipmentHeight')" type="submit" class="btn btn-warning btn-xs"><i class="fa fa-close" aria-hidden="true"></i></button></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline">
+                <label>Вантажність(т):</label>
+            </div>
+            <div class="form-inline">
+                <div class="row">
+                    <div class="col-md-7">
+                        <input style="width:150px;" class="form-control input-sm span2" id="filter-shipment-weight" type="text" />
+                    </div>
+                    <div class="col-md-5">
+                        <span><button ng-click="dropFilter(filter, 'ShipmentWeight')" type="submit" class="btn btn-warning btn-xs"><i class="fa fa-close" aria-hidden="true"></i></button></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline">
+                <label>Об'єм(м3):</label>
+            </div>
+            <div class="form-inline">
+                <div class="row">
+                    <div class="col-md-7">
+                        <input style="width:150px;" class="form-control input-sm span2" id="filter-shipment-capacity" type="text" />
+                    </div>
+                    <div class="col-md-5">
+                        <span><button ng-click="dropFilter(filter, 'ShipmentCapacity')" type="submit" class="btn btn-warning btn-xs"><i class="fa fa-close" aria-hidden="true"></i></button></span>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:10px;">
+                <button ng-click="applyFilter()" type="submit" class="btn btn-success btn-xs"><i ng-show="filterLoading == true" class="fa fa-circle-o-notch fa-spin fa-fw"></i><i ng-show="!filterLoading" class="fa fa-filter" aria-hidden="true"></i>Застосувати</button>
+            </div>
+            </div>
+        <div class="col-md-9" style="margin-top:20px;">
+            <div class="row" ng-show="transportations.length == 0">
+                <div class="col-md-offset-5 btn-sm">
+                    <h4>Немає даних</h4>
+                </div>
+            </div>
+            <div class="media" ng-repeat="trans in transportations">
+                <div class="media-left">
+                    <a href="/transportation/{{trans.id}}">
+                        <img class="media-object" style="width:200px;height:120px;" ng-src="{{pictures[trans.id] || '/Resources/Picture/empty_transportation.png'}}" alt="...">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">{{trans.title}}</h4>
+                    <h5 class="media-heading">Адреса відправлення: {{trans.sendAddress}}</h5>
+                    <h5 class="media-heading">Адреса отримання: {{trans.deliveryAddress}}</h5>
+                    <h5 class="media-heading">Дата створення: {{trans.createdOn}}</h5>
+                    <div class="inline">
+                        <button type="button" class="btn btn-success btn-xs" ng-click="acceptApplication(trans.id)"><i class="fa fa-check" style="margin-right: 8px;" aria-hidden="true"></i>Оформити</button>
+                        <button ng-show="!isExistElementInTrash(trans.id, true)" type="button" class="btn btn-warning btn-xs" ng-click="moveIntoTrash(trans.id, trans.title)"><i class="fa fa-shopping-cart" style="margin-right: 8px;" aria-hidden="true"></i>В корзину</button>
+                        <button ng-show="isExistElementInTrash(trans.id, true)" type="button" class="btn btn-warning btn-xs" ng-click="removeFromTrash(trans.id)"><i class="fa fa-trash" style="margin-right: 8px;" aria-hidden="true"></i>Видалити з корзини</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <i ng-show="isPartLoading" class="fa fa-refresh fa-spin fa-2x fa-fw col-md-offset-7"></i>
+    <button style="margin-top:20px;" type="button" class="btn btn-primary col-md-offset-7 btn-sm" ng-click="loadMore()">Загрузити ще</button>
+</div>

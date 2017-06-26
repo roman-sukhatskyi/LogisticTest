@@ -1,0 +1,91 @@
+﻿<div align="center" ng-show="isLoading">
+    <img src="~/Resources/Picture/loading.gif" align="center"/>
+</div>
+<div class="row" align="center" ng-show="!isLoading" style="margin-top: 100px;">
+    <h4>Заявка на перевезення</h4>
+</div>
+<div class="row" style="margin-top: 25px;" ng-show="!isLoading">
+    <form class="bs-component" name="transForm">
+        <div class="row">
+        <div class="form-group required col-md-6 col-md-offset-3">
+            <label class="control-label">ПІБ:</label>
+            <input class="form-control input-sm" name="fullName" ng-model="transportationToEdit.Name" type="text" required>
+        </div>
+        </div>
+        <div class="row">
+            <div class="form-group required col-md-6  col-md-offset-3">
+                <label class="control-label">Контактний телефон:</label>
+                <input class="form-control input-sm" name="contactPhone" id = "contactPhone" ng-model="transportationToEdit.ContactPhone" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6  col-md-offset-3">
+                <label class="control-label">Адреса відправки:</label>
+                <input class="form-control input-sm" ng-model="transportationToEdit.SendAddress" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6  col-md-offset-3">
+                <label class="control-label">Адреса отримання:</label>
+                <input class="form-control input-sm" ng-model="transportationToEdit.DeliveryAddress" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3  col-md-offset-3">
+                <label class="control-label">Дата отримання вантажу:</label>
+                <input class="form-control input-sm" ng-model="transportationToEdit.CompleteDate" type="date">
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">Тип вантажу:</label>
+                <input class="form-control input-sm" ng-model="transportationToEdit.ShipmentType" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-2  col-md-offset-3">
+                <label class="control-label">Довжина вантажу:</label>
+                <input class="form-control input-sm" ng-model="transportationToEdit.ShipmentLength" type="number">
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label">Ширина вантажу:</label>
+                <input class="form-control input-sm" ng-model="transportationToEdit.ShipmentWidth" type="number">
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label">Висота вантажу:</label>
+                <input class="form-control input-sm" ng-model="transportationToEdit.ShipmentHeight" type="number">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3  col-md-offset-3">
+                <label class="control-label">Вантажність(т):</label>
+                <input class="form-control input-sm" ng-model="transportationToEdit.ShipmentWeight" type="number">
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">Об'єм(м3):</label>
+                <input class="form-control input-sm" ng-model="transportationToEdit.ShipmentCapacity" type="number">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 col-md-offset-3">
+                <button type="submit" class="btn btn-success btn-sm" ng-click="updateTransportation()">Зберегти</button>
+            </div>
+        </div>
+        <div class="row" ng-show="!isLoading" align="center">
+            <div class="row">
+                <div class="form-group col-md-6  col-md-offset-3">
+                    <label class="control-label">Загрузити картинку:</label>
+                    <input type="file" id="trans-picture" name="trans-picture" onchange="angular.element(this).scope().fileChanged()" />
+                </div>
+            </div>
+            <div class="row" style="margin-top: 50px;">
+                <h4>Галерея:</h4>
+                <div class="row" ng-show="htmlPicuresContent == ''">
+                    <div>
+                        <h4>Немає даних</h4>
+                    </div>
+                </div>
+                <div id="gallery-transportation">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

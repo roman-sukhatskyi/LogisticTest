@@ -1,0 +1,75 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="@Url.Content("~/Style/bootswatch/bootstrap.css")" media="screen">
+    <link rel="stylesheet" href="@Url.Content("~/Style/bootswatch/custom.min.css")">
+    @System.Web.Optimization.Scripts.Render("~/bundles/Client/Libraries")
+    @System.Web.Optimization.Scripts.Render("~/bundles/Client/Modules")
+    @System.Web.Optimization.Scripts.Render("~/bundles/Client/Services")
+    @System.Web.Optimization.Scripts.Render("~/bundles/Client/Controllers")
+
+</head>
+<body ng-app="mainModule" ng-controller="ProfileController">
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="#test" class="navbar-brand">ЮМ ЛОГІСТИКА</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="../">Знайти машину</a>
+                    </li>
+                    <li>
+                        <a href="../">Знайти вантаж</a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Залишити заявку <span class="caret"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="download">
+                            <li><a href="../">Перевезення</a></li>
+                            <li><a href="../">Співробітництво</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Авторизація<span class="caret"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="download">
+                            <li><a href="../">Настройки</a></li>
+                            <li><a href="../">Вхід</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="ng-view"></div>
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-unstyled">
+                        <li class="pull-right"><a href="#top">Back to top</a></li>
+                        <li><a href="../">Контакти</a></li>
+                        <li><a href="../">Компанія</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="@Url.Content("~/Style/bootswatch/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Style/bootswatch/custom.js")"></script>
+</body>
+</html>

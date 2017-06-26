@@ -1,0 +1,56 @@
+﻿<div align="center" ng-show="isLoading">
+    <img src="~/Resources/Picture/loading.gif" align="center" />
+</div>
+<div class="row" ng-show="!isLoading">
+    <h4></h4>
+</div>
+<div class="row" style="margin-top: 100px;" ng-show="!isLoading">
+    <a class="btn btn-success btn-sm" href="/accounts_c">
+        <i class="fa fa-user-plus fa-sm" aria-hidden="true"></i> Додати
+    </a>
+    <div class="row" ng-show="users.length == 0">
+        <div class="col-md-offset-6 btn-sm">
+            <p>Немає даних</p>
+        </div>
+    </div>
+    <table class="table table-striped table-hover" ng-show="users.length > 0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Логин</th>
+                <th>ФИО</th>
+                <th>Телефон</th>
+                <th>Робочий</th>
+                <th>Країна</th>
+                <th>Область</th>
+                <th>Місто</th>
+                <th>Вулиця</th>
+                <th>Роль</th>
+                <th></th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users">
+                <td>{{user.id}}</td>
+                <td>{{user.login}}</td>
+                <td>{{user.fullName}}</td>
+                <td>{{user.homePhone}}</td>
+                <td>{{user.workPhone}}</td>
+                <td>{{user.country}}</td>
+                <td>{{user.region}}</td>
+                <td>{{user.city}}</td>
+                <td>{{user.street}}</td>
+                <td>{{user.role}}</td>
+                <td><i style="color:green;text-align:center" class="fa fa-circle" ng-show="user.status == true && (user.role == 'admin' || user.role == 'manager')"></i><i style="color:red;text-align:center" class="fa fa-circle" ng-show="user.status == false && (user.role == 'admin' || user.role == 'manager')"></i></td>
+                <td>
+                    <a class="btn btn-warning btn-sm" href="#" ng-click="deleteUser(user.id)">
+                        <i class="fa fa-trash-o fa-sm"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <i ng-show="isPartLoading" class="fa fa-refresh fa-spin fa-2x fa-fw col-md-offset-6"></i>
+    <button style="margin-top:20px;" type="button" class="btn btn-primary col-md-offset-6 btn-sm" ng-click="loadMore()">Загрузити ще</button>
+</div>

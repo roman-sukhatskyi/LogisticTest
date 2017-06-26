@@ -1,0 +1,48 @@
+﻿<div align="center" ng-show="isLoading">
+    <img src="~/Resources/Picture/loading.gif" align="center" />
+</div>
+<div class="row" ng-show="!isLoading">
+    <h4></h4>
+</div>
+<div class="row" style="margin-top: 100px;" ng-show="!isLoading">
+    <div class="row" ng-show="tasks.length == 0">
+        <div class="col-md-offset-6 btn-sm">
+            <h4>Немає даних</h4>
+        </div>
+    </div>
+    <table class="table table-striped table-hover" ng-show="tasks.length > 0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Тип</th>
+                <th>Заголовок</th>
+                <th>Коли створено</th>
+                <th>Коли змінено</th>
+                <th>Співробітництво</th>
+                <th>Перевезення</th>
+                <th>Користувач</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="task in tasks">
+                <td>{{task.id}}</td>
+                <td><i ng-show="task.typeId == 1" class="fa fa-phone text-success" aria-hidden="true"></i>
+                    <i ng-show="task.typeId == 2 || task.typeId == 3" class="fa fa-file-text-o text-warning" aria-hidden="true"></i> {{task.type}}</td>
+                <td>{{task.title}}</td>
+                <td>{{task.createdOn}}</td>
+                <td>{{task.modifiedOn}}</td>
+                <td><a ng-show="task.cooperationApplicationId != 'не вказано'" href="/cooperation/{{task.cooperationApplicationId}}"><p class="text-center">{{task.cooperationApplicationId}}</p></a></td>
+                <td><a ng-show="task.transportationApplicationId != 'не вказано'" href="/transportation/{{task.transportationApplicationId}}"><p class="text-center">{{task.transportationApplicationId}}</pclass="text-center"></a></td>
+                <td><a href="#"><p ng-click="showUserInfo(task.user)" class="text-center">{{task.user.UserName}}</p></a></td>
+                <td>
+                    <a style="text-decoration:none;" class="btn btn-success btn-sm" href="#" ng-click="acceptTask(task.id)">
+                        <i class="fa fa-check fa-sm"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <i ng-show="isPartLoading" class="fa fa-refresh fa-spin fa-2x fa-fw col-md-offset-6"></i>
+    <button style="margin-top:20px;" type="button" class="btn btn-primary col-md-offset-6 btn-sm" ng-click="loadMore()">Загрузити ще</button>
+</div>

@@ -1,0 +1,69 @@
+﻿<div align="center" ng-show="isLoading">
+    <img src="~/Resources/Picture/loading.gif" align="center"/>
+</div>
+<div class="row" ng-show="!isLoading">
+    <h4></h4>
+</div>
+<div class="row" style="margin-top: 100px;" ng-show="!isLoading">
+    <form class="bs-component" name="registerForm">
+        <div class="row">
+            <div class="form-group required col-md-6 col-md-offset-3">
+                <label class="control-label">Логін:</label>
+                <input class="form-control input-sm" ng-model="userToRegister.Login" name="login" ng-pattern="/^[A-Za-z\d]+$/" type="text" ng-minlength="5" ng-maxlength="20" required>
+                <div ng-messages="registerForm.login.$error" style="color:maroon" role="alert">
+                    <div ng-message="minlength">Ваш логін повиннен містити мінімум 5 символів</div>
+                    <div ng-message="maxlength">Ваш логін повиннен містити максимум 20 символів</div>
+                    <div ng-message="pattern">Логін повиннен містити тільки англійські літери(без спеціальних символів)</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group required col-md-6  col-md-offset-3">
+                <label class="control-label">Пароль:</label>
+                <input class="form-control input-sm" name="password" ng-model="userToRegister.Password" type="password" ng-minlength="5" ng-maxlength="20" required>
+                <div ng-messages="registerForm.password.$error" style="color:maroon" role="alert">
+                    <div ng-message="minlength">Ваш пароль повиннен містити мінімум 5 символів</div>
+                    <div ng-message="maxlength">Ваш пароль повиннен містити максимум 20 символів</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group required col-md-6  col-md-offset-3">
+                <label class="control-label">Підтвердження пароля:</label>
+                <input class="form-control input-sm" name="confirmationPassword" ng-pattern="{{userToRegister.Password}}" ng-model="userToRegister.ConfirmationPassword" type="password" required>
+                <div ng-messages="registerForm.confirmationPassword.$error" style="color:maroon" role="alert">
+                    <div ng-message="pattern">Паролі не співпадають</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group required col-md-6  col-md-offset-3">
+                <label class="control-label">ПІБ:</label>
+                <input class="form-control input-sm" name="fullName" ng-model="userToRegister.FullName" type="text" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6  col-md-offset-3">
+                <label class="control-label">Ваш телефон:</label>
+                <input class="form-control input-sm" name="contactPhone" id="contactPhone" ng-model="userToRegister.WorkPhone" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6  col-md-offset-3">
+                <label class="control-label">Місто проживання:</label>
+                <input class="form-control input-sm" ng-model="userToRegister.City" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6  col-md-offset-3">
+                <label class="control-label">Загрузити картинку:</label>
+                <input type="file" id="user-picture" name="user-picture" onchange="angular.element(this).scope().fileChanged()" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">
+                    <button type="submit" class="btn btn-primary btn-sm" ng-click="registerUser()">Зареєструватися</button>
+            </div>
+        </div>
+    </form>
+</div>
